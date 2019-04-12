@@ -1,22 +1,52 @@
-//
-//  AppDelegate.m
-//  TestApp
-//
-//  Created by lind on 4/12/19.
-//  Copyright © 2019 Adobe. All rights reserved.
-//
+/*
+ ADOBE CONFIDENTIAL
+ 
+ Copyright 2019 Adobe
+ All Rights Reserved.
+ 
+ NOTICE: Adobe permits you to use, modify, and distribute this file in
+ accordance with the terms of the Adobe license agreement accompanying
+ it. If you have received this file from a source other than Adobe,
+ then your use, modification, or distribution of it requires the prior
+ written permission of Adobe.
+ */
 
 #import "AppDelegate.h"
+#import "ACPCore.h"
+#import "ACPIdentity.h"
+#import "ACPLifecycle.h"
+#import "ACPSignal.h"
+#import "SkeletonExtension.h"
 
-@interface AppDelegate ()
-
-@end
+// set the environment id associated with your Launch mobile property
+static NSString *const LaunchEnvironmentId = @"";
 
 @implementation AppDelegate
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    [ACPCore setLogLevel:ACPMobileLogLevelDebug];
+    [ACPCore configureWithAppId:LaunchEnvironmentId];
+
+    
+    // register Adobe core extensions
+    [ACPIdentity registerExtension];
+    [ACPLifecycle registerExtension];
+    [ACPSignal registerExtension];
+    
+    // register the extension
+    [SkeletonExtension registerExtension];
+    
+    // after registering all the extensions, call ACPCore start to start procesing events in the Event Hub
+    [ACPCore start:^{
+        NSLog(@"Mobile SDK as initialized");
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if ([[UIApplication sharedApplication] applicationState] != UIApplicationStateBackground) {
+                [ACPCore lifecycleStart:nil];
+            }
+        });
+    }];
+
     return YES;
 }
 
@@ -28,13 +58,12 @@
 
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    [ACPCore lifecyclePause];
 }
 
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
-    // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+    [ACPCore lifecycleStart:nil];
 }
 
 
