@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		AD78FD53C8F345F477343B48 /* Pods_TestApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AC9AE1B4B4C068FEBC22867 /* Pods_TestApp.framework */; };
 		BFB32A0D22611E52004DAA13 /* SkeletonExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = BFB32A0C22611E52004DAA13 /* SkeletonExtension.m */; };
-		BFB32A0E22611E52004DAA13 /* SkeletonExtension.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = BFB32A0B22611E52004DAA13 /* SkeletonExtension.h */; };
 		BFB32A1C2261205D004DAA13 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BFB32A1B2261205D004DAA13 /* AppDelegate.m */; };
 		BFB32A1F2261205D004DAA13 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFB32A1E2261205D004DAA13 /* ViewController.m */; };
 		BFB32A222261205D004DAA13 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BFB32A202261205D004DAA13 /* Main.storyboard */; };
@@ -18,6 +17,9 @@
 		BFB32A2A2261205F004DAA13 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BFB32A292261205F004DAA13 /* main.m */; };
 		BFB32A2F226124FF004DAA13 /* Queue.m in Sources */ = {isa = PBXBuildFile; fileRef = BFB32A2E226124FF004DAA13 /* Queue.m */; };
 		BFB32A3322613708004DAA13 /* SkeletonExtensionListener.m in Sources */ = {isa = PBXBuildFile; fileRef = BFB32A3222613708004DAA13 /* SkeletonExtensionListener.m */; };
+		BFB32A3622613C5B004DAA13 /* SkeletonExtensionPublicApi.m in Sources */ = {isa = PBXBuildFile; fileRef = BFB32A3522613C5B004DAA13 /* SkeletonExtensionPublicApi.m */; };
+		BFB32A3722613EA2004DAA13 /* SkeletonExtensionPublicApi.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = BFB32A3422613B89004DAA13 /* SkeletonExtensionPublicApi.h */; };
+		BFB32A3822613EE3004DAA13 /* libACPSkeletonExtension.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BFB32A0822611E52004DAA13 /* libACPSkeletonExtension.a */; };
 		CB351AA53F082749F973F33C /* Pods_ACPSkeletonExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E29DC189212DC9BA158ADF8 /* Pods_ACPSkeletonExtension.framework */; };
 /* End PBXBuildFile section */
 
@@ -28,7 +30,7 @@
 			dstPath = "include/$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
-				BFB32A0E22611E52004DAA13 /* SkeletonExtension.h in CopyFiles */,
+				BFB32A3722613EA2004DAA13 /* SkeletonExtensionPublicApi.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -58,6 +60,8 @@
 		BFB32A3022612514004DAA13 /* Queue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Queue.h; sourceTree = "<group>"; };
 		BFB32A31226136BD004DAA13 /* SkeletonExtensionListener.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SkeletonExtensionListener.h; sourceTree = "<group>"; };
 		BFB32A3222613708004DAA13 /* SkeletonExtensionListener.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SkeletonExtensionListener.m; sourceTree = "<group>"; };
+		BFB32A3422613B89004DAA13 /* SkeletonExtensionPublicApi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SkeletonExtensionPublicApi.h; sourceTree = "<group>"; };
+		BFB32A3522613C5B004DAA13 /* SkeletonExtensionPublicApi.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SkeletonExtensionPublicApi.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +77,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BFB32A3822613EE3004DAA13 /* libACPSkeletonExtension.a in Frameworks */,
 				AD78FD53C8F345F477343B48 /* Pods_TestApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -118,6 +123,8 @@
 				BFB32A3022612514004DAA13 /* Queue.h */,
 				BFB32A31226136BD004DAA13 /* SkeletonExtensionListener.h */,
 				BFB32A3222613708004DAA13 /* SkeletonExtensionListener.m */,
+				BFB32A3422613B89004DAA13 /* SkeletonExtensionPublicApi.h */,
+				BFB32A3522613C5B004DAA13 /* SkeletonExtensionPublicApi.m */,
 			);
 			path = ACPSkeletonExtension;
 			sourceTree = "<group>";
@@ -291,6 +298,7 @@
 			files = (
 				BFB32A0D22611E52004DAA13 /* SkeletonExtension.m in Sources */,
 				BFB32A2F226124FF004DAA13 /* Queue.m in Sources */,
+				BFB32A3622613C5B004DAA13 /* SkeletonExtensionPublicApi.m in Sources */,
 				BFB32A3322613708004DAA13 /* SkeletonExtensionListener.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

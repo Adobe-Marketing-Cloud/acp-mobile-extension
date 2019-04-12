@@ -16,7 +16,7 @@
 #import "ACPIdentity.h"
 #import "ACPLifecycle.h"
 #import "ACPSignal.h"
-#import "SkeletonExtension.h"
+#import "SkeletonExtensionPublicApi.h"
 
 // set the environment id associated with your Launch mobile property
 static NSString *const LaunchEnvironmentId = @"";
@@ -35,7 +35,7 @@ static NSString *const LaunchEnvironmentId = @"";
     [ACPSignal registerExtension];
     
     // register the extension
-    [SkeletonExtension registerExtension];
+    [SkeletonExtensionPublicApi registerExtension];
     
     // after registering all the extensions, call ACPCore start to start procesing events in the Event Hub
     [ACPCore start:^{

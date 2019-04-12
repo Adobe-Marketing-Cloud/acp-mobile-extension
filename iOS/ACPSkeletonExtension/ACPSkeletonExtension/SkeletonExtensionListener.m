@@ -18,7 +18,7 @@
 @implementation SkeletonExtensionListener
 
 - (void) hear:(ACPExtensionEvent *)event {
-    [ACPCore log:ACPMobileLogLevelDebug tag:@"WeatherExtensionListener" message:[NSString stringWithFormat:@"Heard an event: %@, %@.  Data: %@", event.eventName, event.eventType, event.eventData]];
+    [ACPCore log:ACPMobileLogLevelDebug tag:@"SkeletonExtensionListener" message:[NSString stringWithFormat:@"Heard an event: %@, %@.  Data: %@", event.eventName, event.eventType, event.eventData]];
     SkeletonExtension* parentExtension = [self getParentExtension];
     if (parentExtension == nil) {
         [ACPCore log:ACPMobileLogLevelWarning tag:@"SkeletonExtensionListener" message:@"The parent extension was nil, skipping event"];

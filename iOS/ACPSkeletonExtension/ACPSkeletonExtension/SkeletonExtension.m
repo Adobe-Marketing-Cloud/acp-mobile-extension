@@ -86,6 +86,7 @@ static NSString* ACP_CONFIGURATION_SHARED_STATE = @"com.adobe.module.configurati
     }
     
     [self.eventQueue add:event];
+    [ACPCore log:ACPMobileLogLevelDebug tag:LOG_TAG message:[NSString stringWithFormat:@"Event queued: %@", event]];
 }
 
 - (void) processEvents {
@@ -108,6 +109,8 @@ static NSString* ACP_CONFIGURATION_SHARED_STATE = @"com.adobe.module.configurati
         
         [self.eventQueue poll];
     }
+    
+    [ACPCore log:ACPMobileLogLevelDebug tag:LOG_TAG message:@"Finished Event processing"];
 }
 
 @end

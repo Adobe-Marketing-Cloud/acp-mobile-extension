@@ -42,7 +42,7 @@
 }
 
 - (bool) hasNext {
-    return [self.queuedEvents objectAtIndex:0] != nil;
+    return [self.queuedEvents count] != 0;
 }
 
 @end
