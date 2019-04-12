@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AD78FD53C8F345F477343B48 /* Pods_TestApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AC9AE1B4B4C068FEBC22867 /* Pods_TestApp.framework */; };
 		BFB32A0D22611E52004DAA13 /* ACPSkeletonExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = BFB32A0C22611E52004DAA13 /* ACPSkeletonExtension.m */; };
 		BFB32A0E22611E52004DAA13 /* ACPSkeletonExtension.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = BFB32A0B22611E52004DAA13 /* ACPSkeletonExtension.h */; };
 		BFB32A1C2261205D004DAA13 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BFB32A1B2261205D004DAA13 /* AppDelegate.m */; };
@@ -15,6 +16,7 @@
 		BFB32A242261205F004DAA13 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BFB32A232261205F004DAA13 /* Assets.xcassets */; };
 		BFB32A272261205F004DAA13 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BFB32A252261205F004DAA13 /* LaunchScreen.storyboard */; };
 		BFB32A2A2261205F004DAA13 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BFB32A292261205F004DAA13 /* main.m */; };
+		CB351AA53F082749F973F33C /* Pods_ACPSkeletonExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E29DC189212DC9BA158ADF8 /* Pods_ACPSkeletonExtension.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -31,6 +33,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0AC9AE1B4B4C068FEBC22867 /* Pods_TestApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TestApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		59D918BE9CE9AA83F3707BE9 /* Pods-ACPSkeletonExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ACPSkeletonExtension.release.xcconfig"; path = "Pods/Target Support Files/Pods-ACPSkeletonExtension/Pods-ACPSkeletonExtension.release.xcconfig"; sourceTree = "<group>"; };
+		6E29DC189212DC9BA158ADF8 /* Pods_ACPSkeletonExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ACPSkeletonExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7FB977C771AA78083786275A /* Pods-ACPSkeletonExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ACPSkeletonExtension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ACPSkeletonExtension/Pods-ACPSkeletonExtension.debug.xcconfig"; sourceTree = "<group>"; };
+		83F1F240ECF2A3DC276E9858 /* Pods-TestApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TestApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TestApp/Pods-TestApp.debug.xcconfig"; sourceTree = "<group>"; };
+		BE71DCA9DE0BE53040F525DA /* Pods-TestApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TestApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-TestApp/Pods-TestApp.release.xcconfig"; sourceTree = "<group>"; };
 		BFB32A0822611E52004DAA13 /* libACPSkeletonExtension.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libACPSkeletonExtension.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFB32A0B22611E52004DAA13 /* ACPSkeletonExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ACPSkeletonExtension.h; sourceTree = "<group>"; };
 		BFB32A0C22611E52004DAA13 /* ACPSkeletonExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ACPSkeletonExtension.m; sourceTree = "<group>"; };
@@ -51,6 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CB351AA53F082749F973F33C /* Pods_ACPSkeletonExtension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -58,18 +67,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AD78FD53C8F345F477343B48 /* Pods_TestApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		575874B38A2B51D96B98E590 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6E29DC189212DC9BA158ADF8 /* Pods_ACPSkeletonExtension.framework */,
+				0AC9AE1B4B4C068FEBC22867 /* Pods_TestApp.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		BFB329FF22611E52004DAA13 = {
 			isa = PBXGroup;
 			children = (
 				BFB32A0A22611E52004DAA13 /* ACPSkeletonExtension */,
 				BFB32A192261205D004DAA13 /* TestApp */,
 				BFB32A0922611E52004DAA13 /* Products */,
+				E321EE6654B4B0E1DA336834 /* Pods */,
+				575874B38A2B51D96B98E590 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -107,6 +128,17 @@
 			path = TestApp;
 			sourceTree = "<group>";
 		};
+		E321EE6654B4B0E1DA336834 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7FB977C771AA78083786275A /* Pods-ACPSkeletonExtension.debug.xcconfig */,
+				59D918BE9CE9AA83F3707BE9 /* Pods-ACPSkeletonExtension.release.xcconfig */,
+				83F1F240ECF2A3DC276E9858 /* Pods-TestApp.debug.xcconfig */,
+				BE71DCA9DE0BE53040F525DA /* Pods-TestApp.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -114,6 +146,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BFB32A1122611E52004DAA13 /* Build configuration list for PBXNativeTarget "ACPSkeletonExtension" */;
 			buildPhases = (
+				F2A5BF13C945D1F9864883AB /* [CP] Check Pods Manifest.lock */,
 				BFB32A0422611E52004DAA13 /* Sources */,
 				BFB32A0522611E52004DAA13 /* Frameworks */,
 				BFB32A0622611E52004DAA13 /* CopyFiles */,
@@ -131,6 +164,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BFB32A2D2261205F004DAA13 /* Build configuration list for PBXNativeTarget "TestApp" */;
 			buildPhases = (
+				1E9E730E73340CE8AB81A91F /* [CP] Check Pods Manifest.lock */,
 				BFB32A142261205D004DAA13 /* Sources */,
 				BFB32A152261205D004DAA13 /* Frameworks */,
 				BFB32A162261205D004DAA13 /* Resources */,
@@ -192,6 +226,53 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1E9E730E73340CE8AB81A91F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TestApp-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F2A5BF13C945D1F9864883AB /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ACPSkeletonExtension-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		BFB32A0422611E52004DAA13 /* Sources */ = {
@@ -348,8 +429,14 @@
 		};
 		BFB32A1222611E52004DAA13 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7FB977C771AA78083786275A /* Pods-ACPSkeletonExtension.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = "";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/ACPCore/include",
+				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -359,8 +446,14 @@
 		};
 		BFB32A1322611E52004DAA13 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 59D918BE9CE9AA83F3707BE9 /* Pods-ACPSkeletonExtension.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = "";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/ACPCore/include",
+				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -370,6 +463,7 @@
 		};
 		BFB32A2B2261205F004DAA13 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 83F1F240ECF2A3DC276E9858 /* Pods-TestApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -387,6 +481,7 @@
 		};
 		BFB32A2C2261205F004DAA13 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BE71DCA9DE0BE53040F525DA /* Pods-TestApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

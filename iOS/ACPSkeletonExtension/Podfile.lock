@@ -1,0 +1,18 @@
+PODS:
+  - ACPCore (2.1.1):
+    - ACPCore/iOS (= 2.1.1)
+  - ACPCore/iOS (2.1.1)
+
+DEPENDENCIES:
+  - ACPCore
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - ACPCore
+
+SPEC CHECKSUMS:
+  ACPCore: c8e84e0cee204364399dba968133cfa31b71e00b
+
+PODFILE CHECKSUM: 019d3b13d8f02dec5ff6f84fbf411984e33723a0
+
+COCOAPODS: 1.5.3
