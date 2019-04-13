@@ -15,11 +15,23 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 class SkeletonExtension extends Extension {
+    private static final String LOG_TAG = "SkeletonExtension";
     private ConcurrentLinkedQueue<Event> eventQueue;
     private ExecutorService executorService;
     private final Object executorMutex = new Object();
 
 
+    /**
+     * Called by the Mobile SDK when registering the extension.
+     * Initialize the extension and register event listeners.
+     * The example below uses {@link SkeletonExtensionListener} to handle all interesting events,
+     * however separate {@link com.adobe.marketing.mobile.ExtensionListener} classes may be used
+     * instead.
+     * It is recommended to listen for each specific event the extension is interested in.
+     * Use of a wildcard listener is discouraged in production environments.
+     *
+     * @param extensionApi the {@link ExtensionApi} instance for this extension
+     */
     protected SkeletonExtension(final ExtensionApi extensionApi) {
         super(extensionApi);
 
@@ -27,27 +39,48 @@ class SkeletonExtension extends Extension {
         extensionApi.registerEventListener(
                 SkeletonExtensionConstants.EVENT_TYPE_ADOBE_HUB,
                 SkeletonExtensionConstants.EVENT_SOURCE_ADOBE_SHARED_STATE,
-                SkeletonExtensionListener.class, null);
+                SkeletonExtensionListener.class, new ExtensionErrorCallback<ExtensionError>() {
+                    @Override
+                    public void error(ExtensionError extensionError) {
+                        MobileCore.log(LoggingMode.ERROR, LOG_TAG, "There was an error registering Extension Listener for shared state events: " + extensionError.getErrorName());
+                    }
+                });
 
         // register a listener for SkeletonExtension request events
         extensionApi.registerEventListener(
-                SkeletonExtensionConstants.EVENT_TYPE_SKELETON_EXTENSION,
-                SkeletonExtensionConstants.EVENT_SOURCE_SKELETON_REQUEST_CONTENT,
-                SkeletonExtensionListener.class, null);
+                SkeletonExtensionConstants.EVENT_TYPE_EXTENSION,
+                SkeletonExtensionConstants.EVENT_SOURCE_EXTENSION_REQUEST_CONTENT,
+                SkeletonExtensionListener.class, new ExtensionErrorCallback<ExtensionError>() {
+                    @Override
+                    public void error(ExtensionError extensionError) {
+                        MobileCore.log(LoggingMode.ERROR, LOG_TAG, "There was an error registering Extension Listener for extension request content events: " + extensionError.getErrorName());
+                    }
+                });
 
         this.eventQueue = new ConcurrentLinkedQueue<>();
     }
 
+    /**
+     * Required override. Each extension must have a unique name within the application.
+     * @return unique name of this extension
+     */
     @Override
     protected String getName() {
         return "com.sample.extension";
     }
 
+    /**
+     * Optional override.
+     * @return the version of this extension
+     */
     @Override
     protected String getVersion() {
         return "1.0.0";
     }
 
+    /**
+     * Optional override. Clean up any open resources before extension is deleted.
+     */
     @Override
     protected void onUnregistered() {
         super.onUnregistered();
@@ -57,11 +90,20 @@ class SkeletonExtension extends Extension {
         getApi().clearSharedEventStates(null);
     }
 
+    /**
+     * Optional override but recommended to handle notifications of unexpected errors
+     * generated from the Mobile SDK.
+     * @param unexpectedError the error instance
+     */
     @Override
     protected void onUnexpectedError(final ExtensionUnexpectedError unexpectedError) {
         super.onUnexpectedError(unexpectedError);
     }
 
+    /**
+     * Called by {@link SkeletonExtensionListener}.
+     * @param event the received event to be queued
+     */
     void queueEvent(final Event event) {
         if (event == null) {
             return;
@@ -70,6 +112,17 @@ class SkeletonExtension extends Extension {
         eventQueue.add(event);
     }
 
+    /**
+     * Called by {@link SkeletonExtensionListener}.
+     * In this example, the Configuration shared state is required
+     * (for example a network URL or a service key may be extracted).
+     * If the Configuration shared state is null it means the shared state is pending.
+     * The logic below will exit processing the event queue if the Configuration shared state is
+     * not available. This extension registers a listener for events of type
+     * {@link com.adobe.marketing.mobile.EventType#HUB} and source
+     * {@link com.adobe.marketing.mobile.EventSource#SHARED_STATE} to kick processing of
+     * queued events when a Configuration shared state is available.
+     */
     void processEvents() {
         while (!eventQueue.isEmpty()) {
             Event eventToProcess = eventQueue.peek();
@@ -93,6 +146,14 @@ class SkeletonExtension extends Extension {
         }
     }
 
+    /**
+     * Called by {@link SkeletonExtensionListener} to retrieve an {@code ExecutorService}.
+     * The {@code ExecutorService} is used to process events on a separate thread than the
+     * {@code EventHub} thread on which they were received. Processing events on a separate
+     * thread prevents blocking of the {@code EventHub}.
+     *
+     * @return this extension's instance of a single thread executor
+     */
     ExecutorService getExecutor() {
         synchronized (executorMutex) {
             if (executorService == null) {

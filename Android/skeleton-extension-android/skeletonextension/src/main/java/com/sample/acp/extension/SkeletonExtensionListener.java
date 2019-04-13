@@ -10,6 +10,12 @@ class SkeletonExtensionListener extends ExtensionListener {
         super(extension, type, source);
     }
 
+    /**
+     * Called by SDK {@code EventHub} when an event is received of the same type and source
+     * as this listener is registered.
+     *
+     * @param event the {@link Event} received by the {@code EventHub}
+     */
     @Override
     public void hear(final Event event) {
         if (event.getEventData() == null) {
@@ -32,7 +38,7 @@ class SkeletonExtensionListener extends ExtensionListener {
                     }
                 });
             }
-        } else if (SkeletonExtensionConstants.EVENT_TYPE_SKELETON_EXTENSION.equalsIgnoreCase(event.getType())) {
+        } else if (SkeletonExtensionConstants.EVENT_TYPE_EXTENSION.equalsIgnoreCase(event.getType())) {
             // handle WeatherExtension events
             getParentExtension().getExecutor().execute(new Runnable() {
                 @Override
@@ -44,6 +50,10 @@ class SkeletonExtensionListener extends ExtensionListener {
         }
     }
 
+    /**
+     * Returns the parent extension that owns this listener.
+     * @return the extension which registered this listener
+     */
     @Override
     protected SkeletonExtension getParentExtension() {
         return (SkeletonExtension) super.getParentExtension();

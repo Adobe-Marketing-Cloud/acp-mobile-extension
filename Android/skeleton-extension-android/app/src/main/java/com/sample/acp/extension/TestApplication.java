@@ -9,7 +9,7 @@ import com.adobe.marketing.mobile.*;
 public class TestApplication extends Application {
     private static final String LOG_TAG = "Test Application";
 
-    // TODO: fill in your API key here
+    // TODO: fill in your Launch environment ID here
     private final String LAUNCH_ENVIRONMENT_ID = "";
 
     @Override
