@@ -17,11 +17,32 @@
 #import <Foundation/Foundation.h>
 #import "ACPExtensionEvent.h"
 
+/**
+ * Queue used to hold events recieved by the extension's listener. The queue is used to hold events for later
+ * processing if, at the time the event is received, specific required data is not available to process the event.
+ */
 @interface Queue : NSObject
 
+/**
+ * Add an `ACPExtensionEvent` to the queue.
+ */
 - (void)add:(nonnull ACPExtensionEvent*)event;
+
+/**
+ * Retrieve the `ACPExtensionEvent` at the top of the queue without removing it.
+ * `Queue::hasNext` must be called before calling this method to ensure there exists at least one element in the queue.
+ */
 - (ACPExtensionEvent*) peek;
+
+/**
+ * Retrieve and remove the `ACPExtensionEvent` at the top of the queue.
+ * `Queue::hasNext` must be called before calling this method to ensure there exists at least one element in the queue.
+ */
 - (ACPExtensionEvent*) poll;
+
+/**
+ * Check if there is at least one element in the queue.
+ */
 - (bool) hasNext;
 
 @end

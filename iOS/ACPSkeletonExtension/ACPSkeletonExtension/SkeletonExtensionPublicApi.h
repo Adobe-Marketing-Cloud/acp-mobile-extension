@@ -16,6 +16,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/**
+ * @brief Class defining interface between Mobile SDK Extension and application.
+ * The Extension Public API class acts as the interface between the application and the Mobile SDK Extension.
+ * Add methods here which the application can make requests of and retrieve data from the Mobile SDK Extension.
+ */
+ 
 @interface SkeletonExtensionPublicApi : NSObject
 
 #pragma mark - Extension Public API methods

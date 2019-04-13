@@ -23,18 +23,26 @@
 @implementation SkeletonExtension
 
 static NSString* LOG_TAG = @"SkeletonExtension";
-static NSString* ACP_STATE_OWNER = @"stateowner";
-static NSString* ACP_CONFIGURATION_SHARED_STATE = @"com.adobe.module.configuration";
+static NSString* ACP_STATE_OWNER = @"stateowner"; // EventData key for shared state owner from events of type hub and source shared state
+static NSString* ACP_CONFIGURATION_SHARED_STATE = @"com.adobe.module.configuration"; // Configuration extension shared state owner name
 
 #pragma mark - Extension methods
+/* Required override, each extension must have a unique name within the application. */
 - (nullable NSString *) name {
     return @"com.sample.acp.extension";
 }
 
+/* Optional override, the version of this extension. */
 - (NSString *) version {
     return @"1.0.0";
 }
 
+/**
+ * Initialize the extension. Register event listeners here. The example below uses the same `SkeletonExtensionListener`
+ * class to handles all interesting events, however separate listener classes may be used instead. It is recommended
+ * to listen for each specific event the extension is interested in. Use of a wildcard listener is discuraged in
+ * production systems.
+ */
 - (instancetype) init {
     if (self = [super init]) {
         NSError *error = nil;
@@ -67,6 +75,7 @@ static NSString* ACP_CONFIGURATION_SHARED_STATE = @"com.adobe.module.configurati
     return self;
 }
 
+/* Optional override to clean up any open resources. */
 - (void) onUnregister {
     [super onUnregister];
     
@@ -75,20 +84,30 @@ static NSString* ACP_CONFIGURATION_SHARED_STATE = @"com.adobe.module.configurati
     [[self api] clearSharedEventStates:nil];
 }
 
+/* Optional override but recommended to handle notifications of unexpected errors generated from the SDK. */
 - (void) unexpectedError:(NSError *)error {
     [super unexpectedError:error];
     [ACPCore log:ACPMobileLogLevelError tag:LOG_TAG message:[NSString stringWithFormat:@"An unexpected error occurred: %@", error.localizedDescription ?: @"unknown"]];
 }
 
+/**
+ * Called by `SkeletonExtensionListener`.
+ */
 - (void) queueEvent: (ACPExtensionEvent*) event {
     if (!event) {
         return;
     }
     
     [self.eventQueue add:event];
-    [ACPCore log:ACPMobileLogLevelDebug tag:LOG_TAG message:[NSString stringWithFormat:@"Event queued: %@", event]];
 }
 
+/**
+ * Called by `SkeletonExtensionListener`.
+ * In this example, the Configuration shared state is required (for example a network URL or a service key may be extracted).
+ * If the Configuration shared state is `nil` it means the shared state is pending. The logic below will exit processing
+ * the event queue if the Configuration shared state is not available. This extension registers a listener for events
+ * of type `hub` and source `sharedState` to kick processing of queued events when a Configuration shared state is available.
+ */
 - (void) processEvents {
     while ([self.eventQueue hasNext]) {
         ACPExtensionEvent* eventToProcess = [self.eventQueue peek];
@@ -109,8 +128,6 @@ static NSString* ACP_CONFIGURATION_SHARED_STATE = @"com.adobe.module.configurati
         
         [self.eventQueue poll];
     }
-    
-    [ACPCore log:ACPMobileLogLevelDebug tag:LOG_TAG message:@"Finished Event processing"];
 }
 
 @end

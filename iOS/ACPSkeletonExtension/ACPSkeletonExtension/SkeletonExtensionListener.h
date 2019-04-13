@@ -21,6 +21,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface SkeletonExtensionListener : ACPExtensionListener
 
+/**
+ * Override from `ACPExtensionListener`. Called by SDK EventHub when an event is received of the same type and source
+ * as this listener is registered.
+ */
 - (void) hear:(ACPExtensionEvent *)event;
 
 @end
