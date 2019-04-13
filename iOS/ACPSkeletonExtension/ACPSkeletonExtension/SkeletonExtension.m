@@ -40,8 +40,8 @@ static NSString* ACP_CONFIGURATION_SHARED_STATE = @"com.adobe.module.configurati
 /**
  * Initialize the extension. Register event listeners here. The example below uses the same `SkeletonExtensionListener`
  * class to handles all interesting events, however separate listener classes may be used instead. It is recommended
- * to listen for each specific event the extension is interested in. Use of a wildcard listener is discuraged in
- * production systems.
+ * to listen for each specific event the extension is interested in. Use of a wildcard listener is discouraged in
+ * production environments.
  */
 - (instancetype) init {
     if (self = [super init]) {

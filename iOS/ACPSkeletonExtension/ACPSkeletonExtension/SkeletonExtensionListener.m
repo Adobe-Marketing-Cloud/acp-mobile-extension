@@ -41,7 +41,7 @@
 }
 
 /**
- * Returns the parent extension that owns this listener
+ * Returns the extension which registered this listener.
  */
 - (SkeletonExtension*) getParentExtension {
     SkeletonExtension* parentExtension = nil;
