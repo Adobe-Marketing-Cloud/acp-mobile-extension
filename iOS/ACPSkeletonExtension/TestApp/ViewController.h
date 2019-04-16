@@ -15,6 +15,13 @@
 
 @interface ViewController : UIViewController
 
+@property (nonatomic, assign) IBOutlet UILabel *lblExtensionData;
+@property (nonatomic, assign) IBOutlet UITextField *txtSetterData;
+@property (nonatomic, assign) IBOutlet UIButton *btnSetter;
+@property (nonatomic, assign) IBOutlet UIButton *btnGetter;
+
+- (IBAction) setDataToExtension:(id)sender;
+- (IBAction) getDataFromExtension:(id)sender;
 
 @end
 

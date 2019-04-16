@@ -18,6 +18,7 @@
 
 @interface SkeletonExtension()
 @property (nonatomic, strong) Queue *eventQueue;
+@property (nonatomic, copy) NSString *stateValue;
 @end
 
 @implementation SkeletonExtension
@@ -70,6 +71,8 @@ static NSString* ACP_CONFIGURATION_SHARED_STATE = @"com.adobe.module.configurati
         
         // initialize the events queue
         self.eventQueue = [[Queue alloc] init];
+        
+        self.stateValue = @"nil";
     }
     
     return self;
@@ -126,8 +129,50 @@ static NSString* ACP_CONFIGURATION_SHARED_STATE = @"com.adobe.module.configurati
             return;
         }
         
+        if (eventToProcess.eventData && [[eventToProcess eventData] objectForKey:@"setterdata"]) {
+            [self processSetterRequestEvent:eventToProcess];
+        } else {
+            [self processGetterRequestEvent:eventToProcess];
+        }
+        
         [self.eventQueue poll];
     }
+}
+
+- (void) processGetterRequestEvent:(ACPExtensionEvent*) requestEvent {
+    NSDictionary* responseData = @{@"getterdata": self.stateValue};
+    NSError* eventError = nil;
+    ACPExtensionEvent *responseEvent = [ACPExtensionEvent extensionEventWithName:@"Get Data Example"
+                                                                            type:@"com.sample.acp.eventType.skeletonExtension"
+                                                                          source:@"com.sample.acp.eventSource.responseContent"
+                                                                            data:responseData
+                                                                           error:&eventError];
+    if (!responseEvent) {
+        [ACPCore log:ACPMobileLogLevelError tag:LOG_TAG message:[NSString stringWithFormat:@"An error occurred constructing event '%@': %@", requestEvent.eventName, eventError.localizedDescription ?: @"unknown"]];
+    }
+    
+    // dispatch the response for the public API
+    NSError *dispatchError = nil;
+    if ([ACPCore dispatchResponseEvent:responseEvent requestEvent:requestEvent error:&dispatchError]) {
+        [ACPCore log:ACPMobileLogLevelDebug tag:LOG_TAG message:[NSString stringWithFormat:@"Dispatched an event '%@'", responseEvent.eventName]];
+    } else {
+        [ACPCore log:ACPMobileLogLevelError tag:LOG_TAG message:[NSString stringWithFormat:@"%@ - An error occurred dispatching event '%@': %@", [self name], responseEvent.eventName, dispatchError.localizedDescription ?: @"unknown"]];
+    }
+}
+
+- (void) processSetterRequestEvent:(ACPExtensionEvent*) requestEvent {
+    if (!requestEvent.eventData || ![[requestEvent eventData] objectForKey:@"setterdata"]) {
+        [ACPCore log:ACPMobileLogLevelWarning tag:LOG_TAG message:@"Request event does not contain required data key, ignoring."];
+        return;
+    }
+    self.stateValue = requestEvent.eventData[@"setterdata"];
+    NSDictionary* extensionState = @{@"setterdata": self.stateValue};
+    
+    NSError *setSharedStateError = nil;
+    if (![[self api] setSharedEventState:extensionState event:requestEvent error:&setSharedStateError] && setSharedStateError != nil) {
+        [ACPCore log:ACPMobileLogLevelError tag:LOG_TAG message:[NSString stringWithFormat:@"An error occurred while setting the shared state %@, error code %ld", extensionState, [setSharedStateError code]]];
+    }
+    
 }
 
 @end

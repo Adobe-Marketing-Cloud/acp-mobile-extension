@@ -92,7 +92,7 @@ public class SkeletonExtensionPublicApi {
         Map<String, Object> requestData = new HashMap<>();
         requestData.put(SkeletonExtensionConstants.EVENT_SETTER_REQUEST_DATA_KEY, data);
 
-        final Event requestEvent = new Event.Builder("Update Data Example",
+        final Event requestEvent = new Event.Builder("Set Data Example",
                 SkeletonExtensionConstants.EVENT_TYPE_EXTENSION,
                 SkeletonExtensionConstants.EVENT_SOURCE_EXTENSION_REQUEST_CONTENT)
                 .setEventData(requestData)

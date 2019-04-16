@@ -40,6 +40,9 @@ static NSString *const LaunchEnvironmentId = @"";
     // after registering all the extensions, call ACPCore start to start procesing events in the Event Hub
     [ACPCore start:^{
         NSLog(@"Mobile SDK as initialized");
+        NSDictionary* config = @{@"global.privacy":@"optedin"};
+        [ACPCore updateConfiguration:config];
+        
         dispatch_async(dispatch_get_main_queue(), ^{
             if ([[UIApplication sharedApplication] applicationState] != UIApplicationStateBackground) {
                 [ACPCore lifecycleStart:nil];

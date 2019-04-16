@@ -34,6 +34,16 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (void) registerExtension;
 
+/**
+ * Example of requesting information from the extension asynchronously. The most common use case is for public getters.
+ */
++ (void) getRequestFromExtension:(nullable void (^) (NSString * __nullable data))callback;
+
+/**
+ * Example of sending data to the extension asynchronously. The most common use case is for public setters.
+ */
++ (void) setRequestToExtension:(NSString *) data;
+
 @end
 
 NS_ASSUME_NONNULL_END

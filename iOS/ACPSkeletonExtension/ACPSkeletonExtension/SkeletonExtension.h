@@ -11,6 +11,9 @@
  written permission of Adobe.
  */
 
+#ifndef SkeletonExtension_h
+#define SkeletonExtension_h
+
 #import "ACPExtension.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -33,4 +36,6 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 NS_ASSUME_NONNULL_END
+
+#endif /* SkeletonExtension_h */
 
