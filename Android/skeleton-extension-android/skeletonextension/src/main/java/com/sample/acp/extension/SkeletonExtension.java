@@ -9,6 +9,7 @@ import com.adobe.marketing.mobile.ExtensionUnexpectedError;
 import com.adobe.marketing.mobile.LoggingMode;
 import com.adobe.marketing.mobile.MobileCore;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.ExecutorService;
@@ -141,9 +142,67 @@ class SkeletonExtension extends Extension {
                 return;
             }
 
+            // example of processing different events
+            Map<String, Object> requestData = eventToProcess.getEventData();
+            if (requestData != null && requestData.containsKey(SkeletonExtensionConstants.EVENT_SETTER_REQUEST_DATA_KEY)) {
+                processSetterRequestEvent(eventToProcess);
+            } else {
+                processGetterRequestEvent(eventToProcess);
+            }
+
             // event processed, remove it from the queue
             eventQueue.poll();
         }
+    }
+
+    /**
+     * Process an {@code Event} which expects a response. Builds a response {@link Event} with
+     * the requested data (in this case a simple string) then dispatches the response event
+     * along with the paired request event.
+     * @param requestEvent the requesting {@code Event}
+     */
+    private void processGetterRequestEvent(final Event requestEvent) {
+        Map<String, Object> responseData = new HashMap<>();
+        responseData.put(SkeletonExtensionConstants.EVENT_GETTER_RESPONSE_DATA_KEY, "hello world");
+        Event responseEvent = new Event.Builder("Extension Get Response",
+                SkeletonExtensionConstants.EVENT_TYPE_EXTENSION,
+                SkeletonExtensionConstants.EVENT_SOURCE_EXTENSION_RESPONSE_CONTENT)
+                .setEventData(responseData)
+                .build();
+
+        if (responseEvent == null) {
+            MobileCore.log(LoggingMode.WARNING, getName(), "An error occurred constructing the response event.");
+        }
+
+        // dispatch the response for the public API
+        ExtensionErrorCallback<ExtensionError> errorCallback = new ExtensionErrorCallback<ExtensionError>() {
+            @Override
+            public void error(final ExtensionError e) {
+                MobileCore.log(LoggingMode.WARNING, getName(), String.format("An error occurred dispatching the response event: %s", e.getErrorName()));
+            }
+        };
+
+        MobileCore.dispatchResponseEvent(responseEvent, requestEvent, errorCallback);
+    }
+
+    /**
+     * Process an {@code Event} which passes data to the extension. Store received data
+     * to this extension's shared state. No response event is required.
+     * @param requestEvent the requesting {@code Event}
+     */
+    private void processSetterRequestEvent(final Event requestEvent) {
+        Map<String, Object> requestData = requestEvent.getEventData();
+        if (requestData == null || !requestData.containsKey(SkeletonExtensionConstants.EVENT_SETTER_REQUEST_DATA_KEY)) {
+            MobileCore.log(LoggingMode.WARNING, getName(), "Request event does not contain required data key, ignoring.");
+            return;
+        }
+
+        String setData = (String) requestData.get(SkeletonExtensionConstants.EVENT_SETTER_REQUEST_DATA_KEY);
+
+        // save new data to extension's shared state
+        Map<String, Object> extensionState = new HashMap<>();
+        extensionState.put(SkeletonExtensionConstants.EVENT_SETTER_REQUEST_DATA_KEY, setData);
+        getApi().setSharedEventState(extensionState, requestEvent, null);
     }
 
     /**
