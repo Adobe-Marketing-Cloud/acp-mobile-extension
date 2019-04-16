@@ -1,9 +1,10 @@
-package com.sample.acp.extension;
+package com.sample.company.tester;
 
 import android.app.Application;
 import android.util.Log;
 
 import com.adobe.marketing.mobile.*;
+import com.sample.company.extension.SkeletonExtensionPublicApi;
 
 
 public class TestApplication extends Application {

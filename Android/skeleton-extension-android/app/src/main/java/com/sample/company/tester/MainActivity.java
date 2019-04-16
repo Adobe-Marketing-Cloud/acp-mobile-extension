@@ -1,4 +1,4 @@
-package com.sample.acp.extension;
+package com.sample.company.tester;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,6 +7,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.adobe.marketing.mobile.MobileCore;
+import com.sample.company.extension.SkeletonExtensionPublicApi;
+import com.sample.company.extension.SkeletonExtensionCallback;
 
 public class MainActivity extends AppCompatActivity {
 

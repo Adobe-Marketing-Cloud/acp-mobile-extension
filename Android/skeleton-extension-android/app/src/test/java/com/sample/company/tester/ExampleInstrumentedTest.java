@@ -1,4 +1,4 @@
-package com.sample.acp.extension;
+package com.sample.company.tester;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.sample.acp.extension.test", appContext.getPackageName());
+        Assert.assertEquals("com.sample.extension", appContext.getPackageName());
     }
 }

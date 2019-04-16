@@ -11,7 +11,7 @@
  written permission of Adobe.
  */
 
-package com.sample.acp.extension;
+package com.sample.company.extension;
 
 public interface SkeletonExtensionCallback {
     void call(final String data);

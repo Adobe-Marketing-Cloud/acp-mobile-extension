@@ -1,4 +1,4 @@
-package com.sample.acp.extension;
+package com.sample.company.extension;
 
 class SkeletonExtensionConstants {
     static final String EVENT_TYPE_EXTENSION = "com.sample.acp.eventType.skeletonExtension";

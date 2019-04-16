@@ -1,4 +1,4 @@
-package com.sample.acp.extension;
+package com.sample.company.extension;
 
 import com.adobe.marketing.mobile.Event;
 import com.adobe.marketing.mobile.ExtensionApi;

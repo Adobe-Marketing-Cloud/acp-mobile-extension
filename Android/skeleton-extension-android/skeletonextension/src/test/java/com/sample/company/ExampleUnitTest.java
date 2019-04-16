@@ -1,4 +1,4 @@
-package com.sample.acp.extension;
+package com.sample.company;
 
 import org.junit.Test;
 

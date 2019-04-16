@@ -1,4 +1,4 @@
-package com.sample.acp.extension;
+package com.sample.company.extension;
 
 import com.adobe.marketing.mobile.Event;
 import com.adobe.marketing.mobile.Extension;
@@ -69,7 +69,7 @@ class SkeletonExtension extends Extension {
      */
     @Override
     protected String getName() {
-        return "com.sample.extension";
+        return "com.sample.company.extension.SkeletonExtension";
     }
 
     /**
