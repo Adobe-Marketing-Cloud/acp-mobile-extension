@@ -21,6 +21,8 @@ class SkeletonExtension extends Extension {
     private ExecutorService executorService;
     private final Object executorMutex = new Object();
 
+    private String stateValue;
+
 
     /**
      * Called by the Mobile SDK when registering the extension.
@@ -142,7 +144,7 @@ class SkeletonExtension extends Extension {
                 return;
             }
 
-            // example of processing different events
+            // example of processing different events based on contained EventData
             Map<String, Object> requestData = eventToProcess.getEventData();
             if (requestData != null && requestData.containsKey(SkeletonExtensionConstants.EVENT_SETTER_REQUEST_DATA_KEY)) {
                 processSetterRequestEvent(eventToProcess);
@@ -163,7 +165,7 @@ class SkeletonExtension extends Extension {
      */
     private void processGetterRequestEvent(final Event requestEvent) {
         Map<String, Object> responseData = new HashMap<>();
-        responseData.put(SkeletonExtensionConstants.EVENT_GETTER_RESPONSE_DATA_KEY, "hello world");
+        responseData.put(SkeletonExtensionConstants.EVENT_GETTER_RESPONSE_DATA_KEY, this.stateValue);
         Event responseEvent = new Event.Builder("Extension Get Response",
                 SkeletonExtensionConstants.EVENT_TYPE_EXTENSION,
                 SkeletonExtensionConstants.EVENT_SOURCE_EXTENSION_RESPONSE_CONTENT)
@@ -197,11 +199,11 @@ class SkeletonExtension extends Extension {
             return;
         }
 
-        String setData = (String) requestData.get(SkeletonExtensionConstants.EVENT_SETTER_REQUEST_DATA_KEY);
+        this.stateValue = (String) requestData.get(SkeletonExtensionConstants.EVENT_SETTER_REQUEST_DATA_KEY);
 
         // save new data to extension's shared state
         Map<String, Object> extensionState = new HashMap<>();
-        extensionState.put(SkeletonExtensionConstants.EVENT_SETTER_REQUEST_DATA_KEY, setData);
+        extensionState.put(SkeletonExtensionConstants.EVENT_SETTER_REQUEST_DATA_KEY, this.stateValue);
         getApi().setSharedEventState(extensionState, requestEvent, null);
     }
 
