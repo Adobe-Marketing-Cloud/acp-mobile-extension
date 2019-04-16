@@ -42,6 +42,8 @@ public class TestApplication extends Application {
             @Override
             public void call(final Object o) {
                 Log.d(LOG_TAG, "Mobile SDK was initialized");
+
+                // uncomment updateConfiguration call if LAUNCH_ENVIRONMENT_ID is not set to initialize Configuration extension
                 Map<String, Object> config = new HashMap<>();
                 config.put("global.privacy", "optedin");
                 MobileCore.updateConfiguration(config);
