@@ -33,7 +33,7 @@
     }
     
     // handle Extension events
-    else if ([event.eventType isEqualToString:@"com.sample.acp.eventType.skeletonExtension"]) {
+    else if ([event.eventType isEqualToString:@"com.sample.company.eventType.skeletonExtension"]) {
         [parentExtension queueEvent:event];
         [parentExtension processEvents];
     }

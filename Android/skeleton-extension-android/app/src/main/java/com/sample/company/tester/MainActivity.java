@@ -1,8 +1,10 @@
 package com.sample.company.tester;
 
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -32,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void onSetDataToExtension(final View view) {
         EditText editTextSetData = findViewById(R.id.etSetData);
+        hideKeyboard(editTextSetData);
         if (editTextSetData == null || editTextSetData.getText() == null) {
             return;
         }
@@ -53,5 +56,12 @@ public class MainActivity extends AppCompatActivity {
                 textViewGetData.setText(data);
             }
         });
+    }
+
+    private void hideKeyboard(final EditText editText) {
+        InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (inputMethodManager != null && editText != null) {
+            inputMethodManager.hideSoftInputFromWindow(editText.getWindowToken(), 0);
+        }
     }
 }

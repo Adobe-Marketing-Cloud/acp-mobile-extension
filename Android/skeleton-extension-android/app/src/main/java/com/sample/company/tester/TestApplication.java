@@ -6,6 +6,9 @@ import android.util.Log;
 import com.adobe.marketing.mobile.*;
 import com.sample.company.extension.SkeletonExtensionPublicApi;
 
+import java.util.HashMap;
+import java.util.Map;
+
 
 public class TestApplication extends Application {
     private static final String LOG_TAG = "Test Application";
@@ -39,6 +42,9 @@ public class TestApplication extends Application {
             @Override
             public void call(final Object o) {
                 Log.d(LOG_TAG, "Mobile SDK was initialized");
+                Map<String, Object> config = new HashMap<>();
+                config.put("global.privacy", "optedin");
+                MobileCore.updateConfiguration(config);
             }
         });
     }

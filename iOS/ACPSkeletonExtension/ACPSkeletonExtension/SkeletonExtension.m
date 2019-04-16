@@ -30,7 +30,7 @@ static NSString* ACP_CONFIGURATION_SHARED_STATE = @"com.adobe.module.configurati
 #pragma mark - Extension methods
 /* Required override, each extension must have a unique name within the application. */
 - (nullable NSString *) name {
-    return @"com.sample.acp.extension";
+    return @"com.sample.company.extension";
 }
 
 /* Optional override, the version of this extension. */
@@ -61,8 +61,8 @@ static NSString* ACP_CONFIGURATION_SHARED_STATE = @"com.adobe.module.configurati
         // register a listener for Extension request events
         error = nil;
         if ([self.api registerListener:[SkeletonExtensionListener class]
-                             eventType:@"com.sample.acp.eventType.skeletonExtension"
-                           eventSource:@"com.sample.acp.eventSource.requestContent"
+                             eventType:@"com.sample.company.eventType.skeletonExtension"
+                           eventSource:@"com.sample.company.eventSource.requestContent"
                                  error:&error]) {
             [ACPCore log:ACPMobileLogLevelDebug tag:LOG_TAG message:@"ExtensionListener successfully registered for Extension Request Content events"];
         } else {
@@ -143,8 +143,8 @@ static NSString* ACP_CONFIGURATION_SHARED_STATE = @"com.adobe.module.configurati
     NSDictionary* responseData = @{@"getterdata": self.stateValue};
     NSError* eventError = nil;
     ACPExtensionEvent *responseEvent = [ACPExtensionEvent extensionEventWithName:@"Get Data Example"
-                                                                            type:@"com.sample.acp.eventType.skeletonExtension"
-                                                                          source:@"com.sample.acp.eventSource.responseContent"
+                                                                            type:@"com.sample.company.eventType.skeletonExtension"
+                                                                          source:@"com.sample.company.eventSource.responseContent"
                                                                             data:responseData
                                                                            error:&eventError];
     if (!responseEvent) {

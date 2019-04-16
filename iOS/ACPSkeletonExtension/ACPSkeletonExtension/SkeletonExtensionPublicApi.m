@@ -39,8 +39,8 @@ static NSString* LOG_TAG = @"SkeletonExtension";
     // create the request event
     NSError *eventError = nil;
     ACPExtensionEvent *requestEvent = [ACPExtensionEvent extensionEventWithName:@"Get Data Example"
-                                                                           type:@"com.sample.acp.eventType.skeletonExtension"
-                                                                         source:@"com.sample.acp.eventSource.requestContent"
+                                                                           type:@"com.sample.company.eventType.skeletonExtension"
+                                                                         source:@"com.sample.company.eventSource.requestContent"
                                                                            data:nil
                                                                           error:&eventError];
     if (!requestEvent) {
@@ -67,8 +67,8 @@ static NSString* LOG_TAG = @"SkeletonExtension";
     // create the request event
     NSError *eventError = nil;
     ACPExtensionEvent *requestEvent = [ACPExtensionEvent extensionEventWithName:@"Set Data Example"
-                                                                           type:@"com.sample.acp.eventType.skeletonExtension"
-                                                                         source:@"com.sample.acp.eventSource.requestContent"
+                                                                           type:@"com.sample.company.eventType.skeletonExtension"
+                                                                         source:@"com.sample.company.eventSource.requestContent"
                                                                            data:requestData
                                                                           error:&eventError];
     if (!requestEvent) {
