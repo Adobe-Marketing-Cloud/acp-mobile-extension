@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
         String dataToSend = editTextSetData.getText().toString();
 
-        SkeletonExtensionPublicApi.setRequestForExtension(dataToSend);
+        SkeletonExtensionPublicApi.setterExample(dataToSend);
     }
 
     public void onGetDataFromExtension(final View view) {
@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        SkeletonExtensionPublicApi.getRequestFromExtension(new SkeletonExtensionCallback() {
+        SkeletonExtensionPublicApi.getterExample(new SkeletonExtensionCallback() {
             @Override
             public void call(String data) {
                 textViewGetData.setText(data);

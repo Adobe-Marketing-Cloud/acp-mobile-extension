@@ -30,7 +30,7 @@ public class SkeletonExtensionPublicApi {
      * use case is for public getters.
      * @param callback method which receives the returned {@code String} data from the extension
      */
-    public static void getRequestFromExtension(final SkeletonExtensionCallback callback) {
+    public static void getterExample(final SkeletonExtensionCallback callback) {
         if (callback == null) {
             MobileCore.log(LoggingMode.WARNING, LOG_TAG, "Cannot make request if callback is null.");
             return;
@@ -86,7 +86,7 @@ public class SkeletonExtensionPublicApi {
      * is for public setters.
      * @param data the data to send to the extension
      */
-    public static void setRequestForExtension(final String data) {
+    public static void setterExample(final String data) {
 
         // create the request event
         Map<String, Object> requestData = new HashMap<>();
