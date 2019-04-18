@@ -63,8 +63,13 @@ public class MainActivity extends AppCompatActivity {
 
         SkeletonExtensionPublicApi.getterExample(new SkeletonExtensionCallback() {
             @Override
-            public void call(String data) {
-                textViewGetData.setText(data);
+            public void call(final String data) {
+                view.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        textViewGetData.setText(data);
+                    }
+                });
             }
         });
     }
