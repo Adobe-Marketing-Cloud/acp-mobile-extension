@@ -30,7 +30,7 @@ static NSString* ACP_CONFIGURATION_SHARED_STATE = @"com.adobe.module.configurati
 #pragma mark - Extension methods
 /* Required override, each extension must have a unique name within the application. */
 - (nullable NSString *) name {
-    return @"com.sample.company.extension";
+    return @"com.sample.company.skeletonextension";
 }
 
 /* Optional override, the version of this extension. */

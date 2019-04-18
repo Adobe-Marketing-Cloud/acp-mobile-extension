@@ -80,7 +80,7 @@ class SkeletonExtension extends Extension {
      */
     @Override
     protected String getName() {
-        return "com.sample.company.extension.SkeletonExtension";
+        return "com.sample.company.SkeletonExtension";
     }
 
     /**
