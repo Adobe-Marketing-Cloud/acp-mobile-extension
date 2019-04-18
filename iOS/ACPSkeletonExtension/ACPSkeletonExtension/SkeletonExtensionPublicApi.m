@@ -30,7 +30,7 @@ static NSString* LOG_TAG = @"SkeletonExtension";
     }
 }
 
-+ (void) getRequestFromExtension:(nullable void (^) (NSString * __nullable data))callback {
++ (void) getterExample:(nullable void (^) (NSString * __nullable data))callback {
     if (!callback) {
         [ACPCore log:ACPMobileLogLevelWarning tag:LOG_TAG message:@"Cannot make request if callback is nil."];
         return;
@@ -61,7 +61,7 @@ static NSString* LOG_TAG = @"SkeletonExtension";
     }
 }
 
-+ (void) setRequestToExtension:(NSString *) data {
++ (void) setterExample:(NSString *) data {
     NSDictionary* requestData = @{@"setterdata":data};
     
     // create the request event

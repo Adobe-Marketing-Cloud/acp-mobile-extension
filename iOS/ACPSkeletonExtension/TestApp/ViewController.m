@@ -29,11 +29,11 @@
     [self.txtSetterData resignFirstResponder];
     NSString* setData = _txtSetterData.text;
     
-    [SkeletonExtensionPublicApi setRequestToExtension:setData];
+    [SkeletonExtensionPublicApi setterExample:setData];
 }
 
 - (IBAction)getDataFromExtension:(id)sender {
-    [SkeletonExtensionPublicApi getRequestFromExtension:^(NSString * _Nullable data) {
+    [SkeletonExtensionPublicApi getterExample:^(NSString * _Nullable data) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if ([[UIApplication sharedApplication] applicationState] != UIApplicationStateBackground) {
                 self.lblExtensionData.text = data;
