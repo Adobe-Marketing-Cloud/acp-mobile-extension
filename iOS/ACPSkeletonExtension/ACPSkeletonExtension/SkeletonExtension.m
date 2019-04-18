@@ -149,6 +149,9 @@ static NSString* ACP_CONFIGURATION_SHARED_STATE = @"com.adobe.module.configurati
                                                                            error:&eventError];
     if (!responseEvent) {
         [ACPCore log:ACPMobileLogLevelError tag:LOG_TAG message:[NSString stringWithFormat:@"An error occurred constructing event '%@': %@", requestEvent.eventName, eventError.localizedDescription ?: @"unknown"]];
+        /* Even though the response event is nil, continue to call ACPCore::dispatchResponseEvent as a response still needs
+            to be dispatched to the waiting paired listener.
+         */
     }
     
     // dispatch the response for the public API
@@ -161,10 +164,6 @@ static NSString* ACP_CONFIGURATION_SHARED_STATE = @"com.adobe.module.configurati
 }
 
 - (void) processSetterRequestEvent:(ACPExtensionEvent*) requestEvent {
-    if (!requestEvent.eventData || ![[requestEvent eventData] objectForKey:@"setterdata"]) {
-        [ACPCore log:ACPMobileLogLevelWarning tag:LOG_TAG message:@"Request event does not contain required data key, ignoring."];
-        return;
-    }
     self.stateValue = requestEvent.eventData[@"setterdata"];
     NSDictionary* extensionState = @{@"setterdata": self.stateValue};
     

@@ -26,6 +26,11 @@ static NSString *const LaunchEnvironmentId = @"";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [ACPCore setLogLevel:ACPMobileLogLevelDebug];
+    
+    /* Launch generates a unique environment ID that the SDK uses to retrieve your configuration. This ID is
+     generated when an app configuration is created and published to a given environment. It is strongly recommended
+     to configure the SDK with the Launch environment ID.
+     */
     [ACPCore configureWithAppId:LaunchEnvironmentId];
 
     
