@@ -167,6 +167,8 @@ static NSString* ACP_CONFIGURATION_SHARED_STATE = @"com.adobe.module.configurati
     self.stateValue = requestEvent.eventData[@"setterdata"];
     NSDictionary* extensionState = @{@"setterdata": self.stateValue};
     
+    // save new data to extension's shared state making it available for other extensions
+    // and as a data element for rules processing
     NSError *setSharedStateError = nil;
     if (![[self api] setSharedEventState:extensionState event:requestEvent error:&setSharedStateError] && setSharedStateError != nil) {
         [ACPCore log:ACPMobileLogLevelError tag:LOG_TAG message:[NSString stringWithFormat:@"An error occurred while setting the shared state %@, error code %ld", extensionState, [setSharedStateError code]]];

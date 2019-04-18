@@ -210,7 +210,8 @@ class SkeletonExtension extends Extension {
         Map<String, Object> requestData = requestEvent.getEventData();
         this.stateValue = (String) requestData.get(SkeletonExtensionConstants.EVENT_SETTER_REQUEST_DATA_KEY);
 
-        // save new data to extension's shared state
+        // save new data to extension's shared state making it available for other extensions
+        // and as a data element for rules processing
         Map<String, Object> extensionState = new HashMap<>();
         extensionState.put(SkeletonExtensionConstants.EVENT_SETTER_REQUEST_DATA_KEY, this.stateValue);
         getApi().setSharedEventState(extensionState, requestEvent, null);
