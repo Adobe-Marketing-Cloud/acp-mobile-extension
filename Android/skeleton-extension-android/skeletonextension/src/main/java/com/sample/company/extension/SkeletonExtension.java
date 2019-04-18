@@ -174,6 +174,9 @@ class SkeletonExtension extends Extension {
 
         if (responseEvent == null) {
             MobileCore.log(LoggingMode.WARNING, getName(), "An error occurred constructing the response event.");
+            /* Even though the response event is nil, continue to call ACPCore::dispatchResponseEvent as a response still needs
+            to be dispatched to the waiting paired listener.
+            */
         }
 
         // dispatch the response for the public API
@@ -194,11 +197,6 @@ class SkeletonExtension extends Extension {
      */
     private void processSetterRequestEvent(final Event requestEvent) {
         Map<String, Object> requestData = requestEvent.getEventData();
-        if (requestData == null || !requestData.containsKey(SkeletonExtensionConstants.EVENT_SETTER_REQUEST_DATA_KEY)) {
-            MobileCore.log(LoggingMode.WARNING, getName(), "Request event does not contain required data key, ignoring.");
-            return;
-        }
-
         this.stateValue = (String) requestData.get(SkeletonExtensionConstants.EVENT_SETTER_REQUEST_DATA_KEY);
 
         // save new data to extension's shared state

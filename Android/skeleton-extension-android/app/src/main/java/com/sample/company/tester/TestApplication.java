@@ -21,9 +21,14 @@ public class TestApplication extends Application {
         super.onCreate();
         MobileCore.setApplication(this);
 
-        // set the environment id associated with your Launch mobile property
-        MobileCore.configureWithAppID(LAUNCH_ENVIRONMENT_ID);
         MobileCore.setLogLevel(LoggingMode.VERBOSE);
+
+        /* Launch generates a unique environment ID that the SDK uses to retrieve your
+        configuration. This ID is generated when an app configuration is created and published to
+        a given environment. It is strongly recommended to configure the SDK with the Launch
+        environment ID.
+        */
+        MobileCore.configureWithAppID(LAUNCH_ENVIRONMENT_ID);
 
         // register Adobe core extensions
         try {
