@@ -14,6 +14,8 @@ package com.sample.company.extension;
 import com.adobe.marketing.mobile.Event;
 import com.adobe.marketing.mobile.ExtensionApi;
 import com.adobe.marketing.mobile.ExtensionListener;
+import com.adobe.marketing.mobile.LoggingMode;
+import com.adobe.marketing.mobile.MobileCore;
 
 class SkeletonExtensionListener extends ExtensionListener {
 
@@ -35,6 +37,7 @@ class SkeletonExtensionListener extends ExtensionListener {
 
         final SkeletonExtension parentExtension = getParentExtension();
         if (parentExtension == null) {
+            MobileCore.log(LoggingMode.WARNING, "SkeletonExtensionListener", "Unable to process event, parent extension instance is null.");
             return;
         }
 

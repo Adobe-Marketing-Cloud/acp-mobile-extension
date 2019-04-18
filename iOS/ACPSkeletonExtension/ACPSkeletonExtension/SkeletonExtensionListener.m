@@ -21,7 +21,7 @@
     [ACPCore log:ACPMobileLogLevelDebug tag:@"SkeletonExtensionListener" message:[NSString stringWithFormat:@"Heard an event: %@, %@.  Data: %@", event.eventName, event.eventType, event.eventData]];
     SkeletonExtension* parentExtension = [self getParentExtension];
     if (parentExtension == nil) {
-        [ACPCore log:ACPMobileLogLevelWarning tag:@"SkeletonExtensionListener" message:@"The parent extension was nil, skipping event"];
+        [ACPCore log:ACPMobileLogLevelWarning tag:@"SkeletonExtensionListener" message:@"Unable to process event, the parent extension was nil."];
         return;
     }
     
