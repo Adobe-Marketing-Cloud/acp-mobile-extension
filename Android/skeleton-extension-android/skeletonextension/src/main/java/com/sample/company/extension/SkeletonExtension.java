@@ -163,6 +163,10 @@ class SkeletonExtension extends Extension {
                 return;
             }
 
+            // example of extracting a configuration value.
+            String sampleConfigValue = (String) configSharedState.get(SkeletonExtensionConstants.SharedState.SAMPLE_CONFIG_KEY);
+            MobileCore.log(LoggingMode.DEBUG, LOG_TAG, String.format("Found sample configuration value of %s.", sampleConfigValue));
+
             // example of processing different events based on contained EventData
             Map<String, Object> requestData = eventToProcess.getEventData();
             if (requestData != null && requestData.containsKey(SkeletonExtensionConstants.EVENT_SETTER_REQUEST_DATA_KEY)) {

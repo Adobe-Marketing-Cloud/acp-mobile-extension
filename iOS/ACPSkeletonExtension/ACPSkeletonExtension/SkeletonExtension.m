@@ -129,6 +129,10 @@ static NSString* ACP_CONFIGURATION_SHARED_STATE = @"com.adobe.module.configurati
             return;
         }
         
+        // example of extracting a configuration value.
+        NSString *sampleConfigValue = configSharedState.count ? configSharedState[@"com.sample.company.configkey"] : @"";
+        [ACPCore log:ACPMobileLogLevelDebug tag:LOG_TAG message:[NSString stringWithFormat:@"Found sample configuration value of %@.", sampleConfigValue]];
+        
         if (eventToProcess.eventData && [[eventToProcess eventData] objectForKey:@"setterdata"]) {
             [self processSetterRequestEvent:eventToProcess];
         } else {

@@ -25,6 +25,7 @@ class SkeletonExtensionConstants {
     class SharedState {
         static final String STATE_OWNER = "stateowner";
         static final String CONFIGURATION = "com.adobe.module.configuration";
+        static final String SAMPLE_CONFIG_KEY = "com.sample.company.configkey";
 
         private SharedState(){}
     }

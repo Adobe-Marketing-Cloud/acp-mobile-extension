@@ -62,6 +62,7 @@ public class TestApplication extends Application {
                 // uncomment updateConfiguration call if LAUNCH_ENVIRONMENT_ID is not set to initialize Configuration extension
                 Map<String, Object> config = new HashMap<>();
                 config.put("global.privacy", "optedin");
+                config.put("com.sample.company.configkey", "example.config.value"); // add a custom configuration value
                 MobileCore.updateConfiguration(config);
             }
         });
