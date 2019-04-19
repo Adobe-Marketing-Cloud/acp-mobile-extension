@@ -18,7 +18,14 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-// A custom extension must inherit from the ACPExtension class, which can be found in ACPCore library
+/**
+ * Class {@code SkeletonExtension} is an implementation of {@link Extension} and is responsible
+ * for registering {@link com.adobe.marketing.mobile.ExtensionListener}s and processing events
+ * heard by those listeners. The extension is registered to the Mobile SDK by calling
+ * {@link MobileCore#registerExtension(Class, ExtensionErrorCallback)} which for this example
+ * is done in {@link SkeletonExtensionPublicApi}. The {@code SkeletonExtension} provides a basic
+ * implementation and example usage for creating a third-party Mobile SDK Extension.
+ */
 @interface SkeletonExtension : ACPExtension
 
 /**

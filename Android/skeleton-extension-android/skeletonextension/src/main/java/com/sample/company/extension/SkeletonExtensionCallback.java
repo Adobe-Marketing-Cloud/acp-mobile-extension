@@ -11,6 +11,16 @@
 
 package com.sample.company.extension;
 
+/**
+ * Callback interface used by {@link SkeletonExtensionPublicApi} to return requested information
+ * from the {@link SkeletonExtension} back to the calling application.
+ */
 public interface SkeletonExtensionCallback {
+    /**
+     * Called when the {@link SkeletonExtension} is finshed processing a getter request for
+     * {@code String} information.
+     *
+     * @param data the requested information from the {@code SkeletonExtension}, may be null
+     */
     void call(final String data);
 }

@@ -19,6 +19,19 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/**
+ * An instance of `ACPExtensionListener, the `SkeletonExtensionListener` is registered
+ * by its "parent" `SkeletonExtension` to hear specific events which are dispatched by
+ * the Mobile SDK Event Hub. Multiple `ExtensionListener` classes may be used to organize
+ * the handling of different events, or, as shown in this example, a single class may be used
+ * by checking the `EventType` and `EventSource`
+ * of the heard event.
+ *
+ * When handling `Event`s received by the Mobile SDK Event Hub, it is important to process
+ * them as quickly as possible. In this example, a background thread is used to process
+ * the events on a separate thread, making the execution time of the `hear` method
+ * relatively quick.
+ */
 @interface SkeletonExtensionListener : ACPExtensionListener
 
 /**

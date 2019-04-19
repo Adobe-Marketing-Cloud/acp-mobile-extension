@@ -21,6 +21,11 @@ import com.adobe.marketing.mobile.MobileCore;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Class defining interface between Mobile SDK Extension and application.
+ * The Extension Public API class acts as the interface between the application and the Mobile SDK Extension.
+ * Add methods here which the application can make requests of and retrieve data from the Mobile SDK Extension.
+ */
 public class SkeletonExtensionPublicApi {
     private static final String LOG_TAG = "Skeleton Extension";
 

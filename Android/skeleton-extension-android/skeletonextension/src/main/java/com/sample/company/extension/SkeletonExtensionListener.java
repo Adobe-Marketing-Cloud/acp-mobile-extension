@@ -17,6 +17,19 @@ import com.adobe.marketing.mobile.ExtensionListener;
 import com.adobe.marketing.mobile.LoggingMode;
 import com.adobe.marketing.mobile.MobileCore;
 
+/**
+ * An instance of {@link ExtensionListener}, the {@code SkeletonExtensionListener} is registered
+ * by its "parent" {@code SkeletonExtension} to hear specific events which are dispatched by
+ * the Mobile SDK Event Hub. Multiple {@link ExtensionListener} classes may be used to organize
+ * the handling of different events, or, as shown in this example, a single class may be used
+ * by checking the {@link com.adobe.marketing.mobile.EventType} and {@link com.adobe.marketing.mobile.EventSource}
+ * of the heard event.
+ * <p>
+ * When handling {@link Event}s received by the Mobile SDK Event Hub, it is important to process
+ * them as quickly as possible. In this example, an {@code ExecutorService} is used to process
+ * the events on a separate thread, making the execution time of the {@code hear} method
+ * relatively quick.
+ */
 class SkeletonExtensionListener extends ExtensionListener {
 
     protected SkeletonExtensionListener(final ExtensionApi extension, final String type, final String source) {
