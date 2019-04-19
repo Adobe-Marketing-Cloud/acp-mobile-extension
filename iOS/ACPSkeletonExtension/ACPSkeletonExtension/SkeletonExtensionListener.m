@@ -13,6 +13,7 @@
 
 #import "ACPCore.h"
 #import "SkeletonExtension.h"
+#import "SkeletonExtensionConstants.h"
 #import "SkeletonExtensionListener.h"
 
 @implementation SkeletonExtensionListener
@@ -26,14 +27,14 @@
     }
     
     // handle SharedState events
-    if ([event.eventType isEqualToString:@"com.adobe.eventType.hub"]) {
-        if ([event.eventData[@"stateowner"] isEqualToString:@"com.adobe.module.configuration"]) {
+    if ([event.eventType isEqualToString:EVENT_TYPE_ADOBE_HUB]) {
+        if ([event.eventData[SHARED_STATE_OWNER] isEqualToString:SHARED_STATE_CONFIGURATION]) {
             [parentExtension processEvents];
         }
     }
     
     // handle Extension events
-    else if ([event.eventType isEqualToString:@"com.sample.company.eventType.skeletonExtension"]) {
+    else if ([event.eventType isEqualToString:EVENT_TYPE_EXTENSION]) {
         [parentExtension queueEvent:event];
         [parentExtension processEvents];
     }

@@ -13,6 +13,7 @@
 
 #import "ACPCore.h"
 #import "SkeletonExtension.h"
+#import "SkeletonExtensionConstants.h"
 #import "SkeletonExtensionPublicApi.h"
 
 @implementation SkeletonExtensionPublicApi
@@ -39,8 +40,8 @@ static NSString* LOG_TAG = @"SkeletonExtension";
     // create the request event
     NSError *eventError = nil;
     ACPExtensionEvent *requestEvent = [ACPExtensionEvent extensionEventWithName:@"Get Data Example"
-                                                                           type:@"com.sample.company.eventType.skeletonExtension"
-                                                                         source:@"com.sample.company.eventSource.requestContent"
+                                                                           type:EVENT_TYPE_EXTENSION
+                                                                         source:EVENT_SOURCE_EXTENSION_REQUEST_CONTENT
                                                                            data:nil
                                                                           error:&eventError];
     if (!requestEvent) {
@@ -52,7 +53,7 @@ static NSString* LOG_TAG = @"SkeletonExtension";
     // dispatch the event and handle the callback
     NSError *dispatchError = nil;
     if ([ACPCore dispatchEventWithResponseCallback:requestEvent responseCallback:^(ACPExtensionEvent * _Nonnull responseEvent) {
-        NSString *extensionData = responseEvent.eventData[@"getterdata"];
+        NSString *extensionData = responseEvent.eventData[EVENT_GETTER_RESPONSE_DATA_KEY];
         callback(extensionData);
     } error:&dispatchError]) {
         [ACPCore log:ACPMobileLogLevelDebug tag:LOG_TAG message:[NSString stringWithFormat:@"Dispatched an event '%@'", requestEvent.eventName]];
@@ -62,13 +63,13 @@ static NSString* LOG_TAG = @"SkeletonExtension";
 }
 
 + (void) setterExample:(NSString *) data {
-    NSDictionary* requestData = @{@"setterdata":data};
+    NSDictionary* requestData = @{EVENT_SETTER_REQUEST_DATA_KEY:data};
     
     // create the request event
     NSError *eventError = nil;
     ACPExtensionEvent *requestEvent = [ACPExtensionEvent extensionEventWithName:@"Set Data Example"
-                                                                           type:@"com.sample.company.eventType.skeletonExtension"
-                                                                         source:@"com.sample.company.eventSource.requestContent"
+                                                                           type:EVENT_TYPE_EXTENSION
+                                                                         source:EVENT_SOURCE_EXTENSION_REQUEST_CONTENT
                                                                            data:requestData
                                                                           error:&eventError];
     if (!requestEvent) {
