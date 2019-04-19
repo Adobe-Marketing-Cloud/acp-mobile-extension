@@ -69,6 +69,9 @@ static NSString* ACP_CONFIGURATION_SHARED_STATE = @"com.adobe.module.configurati
             [ACPCore log:ACPMobileLogLevelError tag:LOG_TAG message:[NSString stringWithFormat:@"There was an error registering ExtensionListener for Extension Request Content events: %@", error.localizedDescription ?: @"unknown"]];
         }
         
+        // initialize this extension's dispatch queue
+        self.dispatchQueue = dispatch_queue_create([[self name] cStringUsingEncoding:NSASCIIStringEncoding], DISPATCH_QUEUE_SERIAL);
+        
         // initialize the events queue
         self.eventQueue = [[Queue alloc] init];
         
