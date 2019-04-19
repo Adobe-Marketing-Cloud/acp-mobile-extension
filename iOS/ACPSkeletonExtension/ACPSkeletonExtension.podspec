@@ -15,7 +15,7 @@ Pod::Spec.new do |s|
   s.platform = :ios, "10.0"
   s.requires_arc = true
 
-  s.default_subspec = "iOS"
+  s.default_subspec = "iOS", '~> 2.0'
 
   s.dependency "ACPCore"
   s.subspec "iOS" do |ios|
