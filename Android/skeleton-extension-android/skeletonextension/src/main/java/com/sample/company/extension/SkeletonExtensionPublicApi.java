@@ -1,3 +1,14 @@
+/*
+  ADOBE CONFIDENTIAL
+  Copyright 2019 Adobe
+  All Rights Reserved.
+  NOTICE: Adobe permits you to use, modify, and distribute this file in
+  accordance with the terms of the Adobe license agreement accompanying
+  it. If you have received this file from a source other than Adobe,
+  then your use, modification, or distribution of it requires the prior
+  written permission of Adobe.
+ */
+
 package com.sample.company.extension;
 
 import com.adobe.marketing.mobile.AdobeCallback;
@@ -10,6 +21,11 @@ import com.adobe.marketing.mobile.MobileCore;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Class defining interface between Mobile SDK Extension and application.
+ * The Extension Public API class acts as the interface between the application and the Mobile SDK Extension.
+ * Add methods here which the application can make requests of and retrieve data from the Mobile SDK Extension.
+ */
 public class SkeletonExtensionPublicApi {
     private static final String LOG_TAG = "Skeleton Extension";
 
@@ -30,7 +46,7 @@ public class SkeletonExtensionPublicApi {
      * use case is for public getters.
      * @param callback method which receives the returned {@code String} data from the extension
      */
-    public static void getRequestFromExtension(final SkeletonExtensionCallback callback) {
+    public static void getterExample(final SkeletonExtensionCallback callback) {
         if (callback == null) {
             MobileCore.log(LoggingMode.WARNING, LOG_TAG, "Cannot make request if callback is null.");
             return;
@@ -86,7 +102,7 @@ public class SkeletonExtensionPublicApi {
      * is for public setters.
      * @param data the data to send to the extension
      */
-    public static void setRequestForExtension(final String data) {
+    public static void setterExample(final String data) {
 
         // create the request event
         Map<String, Object> requestData = new HashMap<>();

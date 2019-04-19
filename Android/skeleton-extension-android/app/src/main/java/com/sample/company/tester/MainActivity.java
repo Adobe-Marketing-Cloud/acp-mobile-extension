@@ -1,3 +1,14 @@
+/*
+  ADOBE CONFIDENTIAL
+  Copyright 2019 Adobe
+  All Rights Reserved.
+  NOTICE: Adobe permits you to use, modify, and distribute this file in
+  accordance with the terms of the Adobe license agreement accompanying
+  it. If you have received this file from a source other than Adobe,
+  then your use, modification, or distribution of it requires the prior
+  written permission of Adobe.
+ */
+
 package com.sample.company.tester;
 
 import android.content.Context;
@@ -41,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
         String dataToSend = editTextSetData.getText().toString();
 
-        SkeletonExtensionPublicApi.setRequestForExtension(dataToSend);
+        SkeletonExtensionPublicApi.setterExample(dataToSend);
     }
 
     public void onGetDataFromExtension(final View view) {
@@ -50,10 +61,15 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        SkeletonExtensionPublicApi.getRequestFromExtension(new SkeletonExtensionCallback() {
+        SkeletonExtensionPublicApi.getterExample(new SkeletonExtensionCallback() {
             @Override
-            public void call(String data) {
-                textViewGetData.setText(data);
+            public void call(final String data) {
+                view.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        textViewGetData.setText(data);
+                    }
+                });
             }
         });
     }

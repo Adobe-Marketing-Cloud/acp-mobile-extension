@@ -20,6 +20,7 @@
 		BFB32A3622613C5B004DAA13 /* SkeletonExtensionPublicApi.m in Sources */ = {isa = PBXBuildFile; fileRef = BFB32A3522613C5B004DAA13 /* SkeletonExtensionPublicApi.m */; };
 		BFB32A3722613EA2004DAA13 /* SkeletonExtensionPublicApi.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = BFB32A3422613B89004DAA13 /* SkeletonExtensionPublicApi.h */; };
 		BFB32A3822613EE3004DAA13 /* libACPSkeletonExtension.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BFB32A0822611E52004DAA13 /* libACPSkeletonExtension.a */; };
+		BFB32A41226A5A2B004DAA13 /* SkeletonExtensionConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = BFB32A40226A5A2B004DAA13 /* SkeletonExtensionConstants.m */; };
 		CB351AA53F082749F973F33C /* Pods_ACPSkeletonExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E29DC189212DC9BA158ADF8 /* Pods_ACPSkeletonExtension.framework */; };
 /* End PBXBuildFile section */
 
@@ -62,6 +63,8 @@
 		BFB32A3222613708004DAA13 /* SkeletonExtensionListener.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SkeletonExtensionListener.m; sourceTree = "<group>"; };
 		BFB32A3422613B89004DAA13 /* SkeletonExtensionPublicApi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SkeletonExtensionPublicApi.h; sourceTree = "<group>"; };
 		BFB32A3522613C5B004DAA13 /* SkeletonExtensionPublicApi.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SkeletonExtensionPublicApi.m; sourceTree = "<group>"; };
+		BFB32A3F226A594F004DAA13 /* SkeletonExtensionConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SkeletonExtensionConstants.h; sourceTree = "<group>"; };
+		BFB32A40226A5A2B004DAA13 /* SkeletonExtensionConstants.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SkeletonExtensionConstants.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,14 +120,16 @@
 		BFB32A0A22611E52004DAA13 /* ACPSkeletonExtension */ = {
 			isa = PBXGroup;
 			children = (
+				BFB32A42226A7B3A004DAA13 /* include */,
 				BFB32A0B22611E52004DAA13 /* SkeletonExtension.h */,
 				BFB32A0C22611E52004DAA13 /* SkeletonExtension.m */,
-				BFB32A2E226124FF004DAA13 /* Queue.m */,
-				BFB32A3022612514004DAA13 /* Queue.h */,
+				BFB32A3F226A594F004DAA13 /* SkeletonExtensionConstants.h */,
+				BFB32A40226A5A2B004DAA13 /* SkeletonExtensionConstants.m */,
 				BFB32A31226136BD004DAA13 /* SkeletonExtensionListener.h */,
 				BFB32A3222613708004DAA13 /* SkeletonExtensionListener.m */,
-				BFB32A3422613B89004DAA13 /* SkeletonExtensionPublicApi.h */,
 				BFB32A3522613C5B004DAA13 /* SkeletonExtensionPublicApi.m */,
+				BFB32A3022612514004DAA13 /* Queue.h */,
+				BFB32A2E226124FF004DAA13 /* Queue.m */,
 			);
 			path = ACPSkeletonExtension;
 			sourceTree = "<group>";
@@ -143,6 +148,14 @@
 				BFB32A292261205F004DAA13 /* main.m */,
 			);
 			path = TestApp;
+			sourceTree = "<group>";
+		};
+		BFB32A42226A7B3A004DAA13 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				BFB32A3422613B89004DAA13 /* SkeletonExtensionPublicApi.h */,
+			);
+			path = include;
 			sourceTree = "<group>";
 		};
 		E321EE6654B4B0E1DA336834 /* Pods */ = {
@@ -300,6 +313,7 @@
 				BFB32A2F226124FF004DAA13 /* Queue.m in Sources */,
 				BFB32A3622613C5B004DAA13 /* SkeletonExtensionPublicApi.m in Sources */,
 				BFB32A3322613708004DAA13 /* SkeletonExtensionListener.m in Sources */,
+				BFB32A41226A5A2B004DAA13 /* SkeletonExtensionConstants.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -31,5 +31,5 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
     // Add Adobe Experience Cloud SDK as a dependency
-    implementation 'com.adobe.marketing.mobile:sdk-core:1.2.1'
+    implementation 'com.adobe.marketing.mobile:sdk-core:1.+'
 }

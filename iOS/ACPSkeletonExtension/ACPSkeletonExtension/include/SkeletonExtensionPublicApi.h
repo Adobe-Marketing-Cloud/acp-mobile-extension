@@ -21,7 +21,6 @@ NS_ASSUME_NONNULL_BEGIN
  * The Extension Public API class acts as the interface between the application and the Mobile SDK Extension.
  * Add methods here which the application can make requests of and retrieve data from the Mobile SDK Extension.
  */
- 
 @interface SkeletonExtensionPublicApi : NSObject
 
 #pragma mark - Extension Public API methods
@@ -37,12 +36,12 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * Example of requesting information from the extension asynchronously. The most common use case is for public getters.
  */
-+ (void) getRequestFromExtension:(nullable void (^) (NSString * __nullable data))callback;
++ (void) getterExample:(nullable void (^) (NSString * __nullable data))callback;
 
 /**
  * Example of sending data to the extension asynchronously. The most common use case is for public setters.
  */
-+ (void) setRequestToExtension:(NSString *) data;
++ (void) setterExample:(NSString *) data;
 
 @end
 

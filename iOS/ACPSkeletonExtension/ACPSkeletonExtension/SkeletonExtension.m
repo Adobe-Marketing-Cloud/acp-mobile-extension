@@ -13,6 +13,7 @@
 
 #import "ACPCore.h"
 #import "SkeletonExtension.h"
+#import "SkeletonExtensionConstants.h"
 #import "SkeletonExtensionListener.h"
 #import "Queue.h"
 
@@ -24,13 +25,11 @@
 @implementation SkeletonExtension
 
 static NSString* LOG_TAG = @"SkeletonExtension";
-static NSString* ACP_STATE_OWNER = @"stateowner"; // EventData key for shared state owner from events of type hub and source shared state
-static NSString* ACP_CONFIGURATION_SHARED_STATE = @"com.adobe.module.configuration"; // Configuration extension shared state owner name
 
 #pragma mark - Extension methods
 /* Required override, each extension must have a unique name within the application. */
 - (nullable NSString *) name {
-    return @"com.sample.company.extension";
+    return @"com.sample.company.skeletonextension";
 }
 
 /* Optional override, the version of this extension. */
@@ -50,8 +49,8 @@ static NSString* ACP_CONFIGURATION_SHARED_STATE = @"com.adobe.module.configurati
         
         // register a listener for shared state changes
         if ([self.api registerListener:[SkeletonExtensionListener class]
-                             eventType:@"com.adobe.eventType.hub"
-                           eventSource:@"com.adobe.eventSource.sharedState"
+                             eventType:EVENT_TYPE_ADOBE_HUB
+                           eventSource:EVENT_SOURCE_ADOBE_SHARED_STATE
                                  error:&error]) {
             [ACPCore log:ACPMobileLogLevelDebug tag:LOG_TAG message:@"ExtensionListener successfully registered for Event Hub Shared State events"];
         } else {
@@ -61,8 +60,8 @@ static NSString* ACP_CONFIGURATION_SHARED_STATE = @"com.adobe.module.configurati
         // register a listener for Extension request events
         error = nil;
         if ([self.api registerListener:[SkeletonExtensionListener class]
-                             eventType:@"com.sample.company.eventType.skeletonExtension"
-                           eventSource:@"com.sample.company.eventSource.requestContent"
+                             eventType:EVENT_TYPE_EXTENSION
+                           eventSource:EVENT_SOURCE_EXTENSION_REQUEST_CONTENT
                                  error:&error]) {
             [ACPCore log:ACPMobileLogLevelDebug tag:LOG_TAG message:@"ExtensionListener successfully registered for Extension Request Content events"];
         } else {
@@ -119,7 +118,7 @@ static NSString* ACP_CONFIGURATION_SHARED_STATE = @"com.adobe.module.configurati
         ACPExtensionEvent* eventToProcess = [self.eventQueue peek];
         
         NSError *error = nil;
-        NSDictionary *configSharedState = [self.api getSharedEventState:ACP_CONFIGURATION_SHARED_STATE event:eventToProcess error:&error];
+        NSDictionary *configSharedState = [self.api getSharedEventState:SHARED_STATE_CONFIGURATION event:eventToProcess error:&error];
         
         // NOTE: configuration is mandatory processing the event, so if shared state is null stop processing events
         if (!configSharedState) {
@@ -132,7 +131,11 @@ static NSString* ACP_CONFIGURATION_SHARED_STATE = @"com.adobe.module.configurati
             return;
         }
         
-        if (eventToProcess.eventData && [[eventToProcess eventData] objectForKey:@"setterdata"]) {
+        // example of extracting a configuration value.
+        NSString *sampleConfigValue = configSharedState.count ? configSharedState[SHARED_STATE_SAMPLE_CONFIG_KEY] : @"";
+        [ACPCore log:ACPMobileLogLevelDebug tag:LOG_TAG message:[NSString stringWithFormat:@"Found sample configuration value of '%@'.", sampleConfigValue]];
+        
+        if (eventToProcess.eventData && [[eventToProcess eventData] objectForKey:EVENT_SETTER_REQUEST_DATA_KEY]) {
             [self processSetterRequestEvent:eventToProcess];
         } else {
             [self processGetterRequestEvent:eventToProcess];
@@ -143,15 +146,18 @@ static NSString* ACP_CONFIGURATION_SHARED_STATE = @"com.adobe.module.configurati
 }
 
 - (void) processGetterRequestEvent:(ACPExtensionEvent*) requestEvent {
-    NSDictionary* responseData = @{@"getterdata": self.stateValue};
+    NSDictionary* responseData = @{EVENT_GETTER_RESPONSE_DATA_KEY: self.stateValue};
     NSError* eventError = nil;
     ACPExtensionEvent *responseEvent = [ACPExtensionEvent extensionEventWithName:@"Get Data Example"
-                                                                            type:@"com.sample.company.eventType.skeletonExtension"
-                                                                          source:@"com.sample.company.eventSource.responseContent"
+                                                                            type:EVENT_TYPE_EXTENSION
+                                                                          source:EVENT_SOURCE_EXTENSION_RESPONSE_CONTENT
                                                                             data:responseData
                                                                            error:&eventError];
     if (!responseEvent) {
         [ACPCore log:ACPMobileLogLevelError tag:LOG_TAG message:[NSString stringWithFormat:@"An error occurred constructing event '%@': %@", requestEvent.eventName, eventError.localizedDescription ?: @"unknown"]];
+        /* Even though the response event is nil, continue to call ACPCore::dispatchResponseEvent as a response still needs
+            to be dispatched to the waiting paired listener.
+         */
     }
     
     // dispatch the response for the public API
@@ -164,13 +170,11 @@ static NSString* ACP_CONFIGURATION_SHARED_STATE = @"com.adobe.module.configurati
 }
 
 - (void) processSetterRequestEvent:(ACPExtensionEvent*) requestEvent {
-    if (!requestEvent.eventData || ![[requestEvent eventData] objectForKey:@"setterdata"]) {
-        [ACPCore log:ACPMobileLogLevelWarning tag:LOG_TAG message:@"Request event does not contain required data key, ignoring."];
-        return;
-    }
-    self.stateValue = requestEvent.eventData[@"setterdata"];
-    NSDictionary* extensionState = @{@"setterdata": self.stateValue};
+    self.stateValue = requestEvent.eventData[EVENT_SETTER_REQUEST_DATA_KEY];
+    NSDictionary* extensionState = @{EVENT_SETTER_REQUEST_DATA_KEY: self.stateValue};
     
+    // save new data to extension's shared state making it available for other extensions
+    // and as a data element for rules processing
     NSError *setSharedStateError = nil;
     if (![[self api] setSharedEventState:extensionState event:requestEvent error:&setSharedStateError] && setSharedStateError != nil) {
         [ACPCore log:ACPMobileLogLevelError tag:LOG_TAG message:[NSString stringWithFormat:@"An error occurred while setting the shared state %@, error code %ld", extensionState, [setSharedStateError code]]];

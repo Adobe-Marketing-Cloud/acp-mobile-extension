@@ -26,6 +26,11 @@ static NSString *const LaunchEnvironmentId = @"";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [ACPCore setLogLevel:ACPMobileLogLevelDebug];
+    
+    /* Launch generates a unique environment ID that the SDK uses to retrieve your configuration. This ID is
+     generated when an app configuration is created and published to a given environment. It is strongly recommended
+     to configure the SDK with the Launch environment ID.
+     */
     [ACPCore configureWithAppId:LaunchEnvironmentId];
 
     
@@ -39,10 +44,13 @@ static NSString *const LaunchEnvironmentId = @"";
     
     // after registering all the extensions, call ACPCore start to start procesing events in the Event Hub
     [ACPCore start:^{
-        NSLog(@"Mobile SDK as initialized");
+        NSLog(@"Mobile SDK is initialized");
         
         // Uncomment updateConfiguration call if LaunchEnvironmentId is not set to initialize Configuration extension
-        [ACPCore updateConfiguration:@{@"global.privacy":@"optedin"}];
+        NSMutableDictionary *config = [NSMutableDictionary dictionary];
+        config[@"global.privacy"] = @"optedin";
+        config[@"com.sample.company.configkey"] = @"example.config.value"; // add a custom configuration value
+        [ACPCore updateConfiguration:config];
         
         dispatch_async(dispatch_get_main_queue(), ^{
             if ([[UIApplication sharedApplication] applicationState] != UIApplicationStateBackground) {

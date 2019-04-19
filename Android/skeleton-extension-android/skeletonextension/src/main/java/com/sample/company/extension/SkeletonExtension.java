@@ -1,3 +1,14 @@
+/*
+  ADOBE CONFIDENTIAL
+  Copyright 2019 Adobe
+  All Rights Reserved.
+  NOTICE: Adobe permits you to use, modify, and distribute this file in
+  accordance with the terms of the Adobe license agreement accompanying
+  it. If you have received this file from a source other than Adobe,
+  then your use, modification, or distribution of it requires the prior
+  written permission of Adobe.
+ */
+
 package com.sample.company.extension;
 
 import com.adobe.marketing.mobile.Event;
@@ -15,6 +26,14 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+/**
+ * Class {@code SkeletonExtension} is an implementation of {@link Extension} and is responsible
+ * for registering {@link com.adobe.marketing.mobile.ExtensionListener}s and processing events
+ * heard by those listeners. The extension is registered to the Mobile SDK by calling
+ * {@link MobileCore#registerExtension(Class, ExtensionErrorCallback)} which for this example
+ * is done in {@link SkeletonExtensionPublicApi}. The {@code SkeletonExtension} provides a basic
+ * implementation and example usage for creating a third-party Mobile SDK Extension.
+ */
 class SkeletonExtension extends Extension {
     private static final String LOG_TAG = "SkeletonExtension";
     private ConcurrentLinkedQueue<Event> eventQueue;
@@ -69,7 +88,7 @@ class SkeletonExtension extends Extension {
      */
     @Override
     protected String getName() {
-        return "com.sample.company.extension.SkeletonExtension";
+        return "com.sample.company.SkeletonExtension";
     }
 
     /**
@@ -144,6 +163,10 @@ class SkeletonExtension extends Extension {
                 return;
             }
 
+            // example of extracting a configuration value.
+            String sampleConfigValue = (String) configSharedState.get(SkeletonExtensionConstants.SharedState.SAMPLE_CONFIG_KEY);
+            MobileCore.log(LoggingMode.DEBUG, LOG_TAG, String.format("Found sample configuration value of %s.", sampleConfigValue));
+
             // example of processing different events based on contained EventData
             Map<String, Object> requestData = eventToProcess.getEventData();
             if (requestData != null && requestData.containsKey(SkeletonExtensionConstants.EVENT_SETTER_REQUEST_DATA_KEY)) {
@@ -174,6 +197,9 @@ class SkeletonExtension extends Extension {
 
         if (responseEvent == null) {
             MobileCore.log(LoggingMode.WARNING, getName(), "An error occurred constructing the response event.");
+            /* Even though the response event is nil, continue to call ACPCore::dispatchResponseEvent as a response still needs
+            to be dispatched to the waiting paired listener.
+            */
         }
 
         // dispatch the response for the public API
@@ -194,14 +220,10 @@ class SkeletonExtension extends Extension {
      */
     private void processSetterRequestEvent(final Event requestEvent) {
         Map<String, Object> requestData = requestEvent.getEventData();
-        if (requestData == null || !requestData.containsKey(SkeletonExtensionConstants.EVENT_SETTER_REQUEST_DATA_KEY)) {
-            MobileCore.log(LoggingMode.WARNING, getName(), "Request event does not contain required data key, ignoring.");
-            return;
-        }
-
         this.stateValue = (String) requestData.get(SkeletonExtensionConstants.EVENT_SETTER_REQUEST_DATA_KEY);
 
-        // save new data to extension's shared state
+        // save new data to extension's shared state making it available for other extensions
+        // and as a data element for rules processing
         Map<String, Object> extensionState = new HashMap<>();
         extensionState.put(SkeletonExtensionConstants.EVENT_SETTER_REQUEST_DATA_KEY, this.stateValue);
         getApi().setSharedEventState(extensionState, requestEvent, null);
