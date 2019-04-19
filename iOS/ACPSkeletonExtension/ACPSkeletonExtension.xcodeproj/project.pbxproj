@@ -120,13 +120,13 @@
 		BFB32A0A22611E52004DAA13 /* ACPSkeletonExtension */ = {
 			isa = PBXGroup;
 			children = (
+				BFB32A42226A7B3A004DAA13 /* include */,
 				BFB32A0B22611E52004DAA13 /* SkeletonExtension.h */,
 				BFB32A0C22611E52004DAA13 /* SkeletonExtension.m */,
 				BFB32A3F226A594F004DAA13 /* SkeletonExtensionConstants.h */,
 				BFB32A40226A5A2B004DAA13 /* SkeletonExtensionConstants.m */,
 				BFB32A31226136BD004DAA13 /* SkeletonExtensionListener.h */,
 				BFB32A3222613708004DAA13 /* SkeletonExtensionListener.m */,
-				BFB32A3422613B89004DAA13 /* SkeletonExtensionPublicApi.h */,
 				BFB32A3522613C5B004DAA13 /* SkeletonExtensionPublicApi.m */,
 				BFB32A3022612514004DAA13 /* Queue.h */,
 				BFB32A2E226124FF004DAA13 /* Queue.m */,
@@ -148,6 +148,14 @@
 				BFB32A292261205F004DAA13 /* main.m */,
 			);
 			path = TestApp;
+			sourceTree = "<group>";
+		};
+		BFB32A42226A7B3A004DAA13 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				BFB32A3422613B89004DAA13 /* SkeletonExtensionPublicApi.h */,
+			);
+			path = include;
 			sourceTree = "<group>";
 		};
 		E321EE6654B4B0E1DA336834 /* Pods */ = {
