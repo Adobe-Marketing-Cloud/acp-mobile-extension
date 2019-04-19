@@ -21,6 +21,9 @@ NS_ASSUME_NONNULL_BEGIN
 // A custom extension must inherit from the ACPExtension class, which can be found in ACPCore library
 @interface SkeletonExtension : ACPExtension
 
+/* this extension's dispatch queue for processing heard events */
+@property (nonatomic, strong) dispatch_queue_t dispatchQueue;
+
 /**
  * @brief Queue an event for later processing.
  * Queue events received by extension event listeners.

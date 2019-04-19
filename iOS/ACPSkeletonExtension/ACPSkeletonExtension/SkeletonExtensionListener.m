@@ -28,14 +28,18 @@
     // handle SharedState events
     if ([event.eventType isEqualToString:@"com.adobe.eventType.hub"]) {
         if ([event.eventData[@"stateowner"] isEqualToString:@"com.adobe.module.configuration"]) {
-            [parentExtension processEvents];
+            dispatch_async([parentExtension dispatchQueue], ^{
+                [parentExtension processEvents];
+            });
         }
     }
     
     // handle Extension events
     else if ([event.eventType isEqualToString:@"com.sample.company.eventType.skeletonExtension"]) {
-        [parentExtension queueEvent:event];
-        [parentExtension processEvents];
+        dispatch_async([parentExtension dispatchQueue], ^{
+            [parentExtension queueEvent:event];
+            [parentExtension processEvents];
+        });
     }
     
 }
