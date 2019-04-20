@@ -62,4 +62,4 @@ There is a great deal of information available to learn more about the Adobe Exp
 - [Launch extension developer docs](https://developer.adobelaunch.com/extensions/)
 - [Launch developers slack channel](http://join.launchdevelopers.chat/)
 - [Weather Extension sample application](https://github.com/Adobe-Marketing-Cloud/acp-sdks/tree/weather-example)
->>>>>>> old/master
+
